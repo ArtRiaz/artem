@@ -83,7 +83,7 @@
         <button id="buy">Get Started</button>
     </div>
     <form id="form">
-        <input type="text" id="name" placeholder="Name">
+        <input type="text" id="user_name" placeholder="Name">
         <input type="text" id="number" placeholder="Number">
         <button id="submit">Submit</button>
     </form>
@@ -96,7 +96,7 @@
             buy.addEventListener('click', () => {
                 document.getElementById('main').style.display = 'none';
                 document.getElementById('form').style.display = 'block';
-                document.getElementById('name').value = tg.initDataUnsafe.user.first_name + ' ' + tg.initDataUnsafe.last_name;
+                document.getElementById('user_name').value = tg.initDataUnsafe.user.first_name + ' ' + tg.initDataUnsafe.user.last_name;
             });
 
             submit.addEventListener('click', () => {
