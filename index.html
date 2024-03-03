@@ -104,9 +104,9 @@
             });
 
             submit.addEventListener('click', () => {
-                tg.MainButton.setText("Message sent");
-                tg.MainButton.show();
-                tg.sendData("Send");
+                let name = document.getElementById('user_name').value;
+                let number = document.getElementById('number').value;
+                tg.close()
             });
         </script>
   </body>
