@@ -104,8 +104,9 @@
             });
 
             submit.addEventListener('click', () => {
+                tg.MainButton.setText("Message sent");
+                tg.MainButton.show();
                 tg.sendData("Send");
-                tg.close();
             });
         </script>
   </body>
