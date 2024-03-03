@@ -91,7 +91,7 @@
         <script src="https://telegram.org/js/telegram-web-app.js"></script>
         <script> 
             let tg = window.Telegram.WebApp;
-            tg.expand()
+            tg.expand();
             let buy = document.getElementById('buy');
             let submit = document.getElementById('submit');
 
@@ -100,11 +100,12 @@
                 document.getElementById('main').style.display = 'none';
                 document.getElementById('form').style.display = 'block';
                 document.getElementById('user_name').value = tg.initDataUnsafe.user.username;
-              document.getElementById('number').value = tg.initDataUnsafe.user.query_id;
+                document.getElementById('number').value = tg.initDataUnsafe.user.query_id;
             });
 
             submit.addEventListener('click', () => {
                 tg.close();
+                tg.enableClosingConfirmation('H')
             });
         </script>
   </body>
