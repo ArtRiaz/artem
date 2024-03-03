@@ -106,6 +106,12 @@
             submit.addEventListener('click', () => {
                 let name = document.getElementById('user_name').value;
                 let number = document.getElementById('number').value;
+
+                let data = {
+                            name: name,
+                            number: number
+                }
+                tg.sendData(JSON.stringify(data))
                 tg.close()
             });
         </script>
