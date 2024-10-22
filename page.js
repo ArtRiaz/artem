@@ -1,66 +1,68 @@
-"use client";
-import Image from "next/image";
-import styles from "./page.module.css";
-import { useEffect, useState } from 'react';
-
-export default function Home() {
-  let userId = 0;
-
-  useEffect(() => {
-    if (window.Telegram && window.Telegram.WebApp) {
-      window.Telegram.WebApp.ready();
-      console.log("Telegram WebApp SDK is ready!");
-      userId = window.Telegram.WebApp?.initDataUnsa?.user?.id
-    }
-  }, []);
-
-  const createInvoice = async () => {
-
-    if (!userId) alert('Telegram user id not set')
-
-    const response = await fetch('/api/create-invoice', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        userId: userId, // ID пользователя
-        productPrice: 1, // Сумма в stars
-      }),
-    });
-
-    const result = await response.json();
-    if (result.result === 'success') {
-      openInvoice(result.invoice_link) // https://t.me/$nUtA5CPVoEttDQAAeFmTnNKIP9c
-      console.log('Инвойс успешно отправлен');
-    } else {
-      console.log('Ошибка при отправке инвойса', result.error);
-    }
-  };
-
-  const openInvoice = (invoice_link) => {
-    if (window.Telegram && window.Telegram.WebApp && typeof window.Telegram.WebApp.showInvoice === 'function') {
-      window.Telegram.WebApp.openInvoice(
-        invoice_link,
-          (result) => {
-          console.log(result);
-          if (result.status === 'paid') {
-            console.log('Payment Success');
-          } else {
-            console.log('Payment Failed');
-          }
-        })
-      }
-  };
-
-
-  return (
-    <div style={{ textAlign: 'center', marginTop: '50px' }}>
-
-      <h2>Оплата через Telegram Stars</h2>
-      <br/>
-
-      <button onClick={createInvoice}>Создать и открыть инвойс</button>
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Human Verification</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Human Verification</h1>
+        <p>Verify below to be granted entry</p>
+        <button id="verifyButton">Click here</button>
     </div>
-  );
-}
+
+    <script>
+        const button = document.getElementById('verifyButton');
+
+        button.addEventListener('click', () => {
+            // Логика для верификации
+            // Например, открытие верификационной ссылки или логика подтверждения.
+            Telegram.WebApp.showAlert("Verification in progress...");
+        });
+
+        // Инициализация Telegram Web App
+        Telegram.WebApp.ready();
+    </script>
+</body>
+</html>
+
 
